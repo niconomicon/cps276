@@ -42,10 +42,9 @@
                 <div class="form-group col-md-4">
                     <label for="state">State</label>
                     <select id="state" class="form-control">
-                        <option selected>Choose...</option>
                         <option>Connecticut</option>
                         <option>New York</option>
-                        <option>Michigan</option>
+                        <option selected>Michigan</option>
                         <option>Oregon</option>
                         <option>California</option>
                     </select>
@@ -58,7 +57,7 @@
             
             <!--Gender Radio Buttons-->
             <div class="form-group">
-                <label for="gender">Gender</label>
+                <!--<label for="gender">Gender</label>-->
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="genderOptions" id="maleRadio" value="option1">
                         <label class="form-check-label" for="male">Male</label>
