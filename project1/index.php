@@ -13,6 +13,7 @@
   <body>
     <div class="container">
         <form>
+            <!--First & Last Name Fields-->
             <div class="form-group">
                 <label for="fname">First Name</label>
                 <input type="text" class="form-control" id="fname">
@@ -21,6 +22,7 @@
                 <label for="lname">Last Name</label>
                 <input type="text" class="form-control" id="lname">
             </div>
+            <!--Address Fields-->
             <div class="form-group">
                 <label for="address">Address</label>
                 <input type="text" class="form-control" id="address">
@@ -33,10 +35,19 @@
                 <label for="state">State</label>
                 <input type="text" class="form-control" id="state">
             </div>
+            <!--Gender Radio Buttons-->
             <div class="form-group">
                 <label for="gender">Gender</label>
-                <input type="text" class="form-control" id="gender">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="genderOptions" id="maleRadio" value="option1">
+                        <label class="form-check-label" for="male">Male</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="genderOptions" id="femaleRadio" value="option2">
+                        <label class="form-check-label" for="female">Female</label>
+                    </div>
             </div>
+            <!--Register Button-->
             <button type="submit" class="btn btn-primary">Register</button>
         </form> 
     </div>     
