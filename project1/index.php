@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="container">
-        <form>
+        <form method="post" action="#">
             <!--First & Last Name Fields-->
             <div class="row">
                 <div class="col">
