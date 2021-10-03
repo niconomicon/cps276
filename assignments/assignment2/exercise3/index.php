@@ -9,6 +9,19 @@ how to create a table. You need to write all the PHP functionality above the doc
 display the resulting HTML string via a variable in the echo statement within the body
 element.*/
 
+function tableFunction($rows,$cells) {
+        echo "<table border=\"1\">";
+    for ($i=1; $i <= $rows; $i++) {
+        
+        echo "<tr>";
+        for ($j=1; $j<= $cells; $j++) {
+            
+            echo "<td> Row ".$i." Cell ".$j."</td>";
+        }
+        echo "</tr>";    
+    }
+    echo "</table>";
+}
 
 
 ?>
@@ -19,6 +32,7 @@ element.*/
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Exercise 3</title>
+    <?php echo tableFunction(15,5)?>
 </head>
 <body>
 </body>

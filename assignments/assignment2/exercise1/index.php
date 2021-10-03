@@ -7,13 +7,17 @@ You need to write all the PHP functionality above the doctype and display the re
 HTML string via a variable in the echo statement within the body element of the
 webpage. */
 
-function myFunction($num1,$num2) {
-    for ($i = 1; $i <= $num1; $i++){ 
-        echo $i . "<br>";
-        for ($j = 1; $j <= $num2; $j++){
-             echo "&nbsp;&nbsp;&nbsp;&nbsp;".$j."<br>"; 
+function myFunction($outsideListNum,$insideListNum) {
+    echo "<ul>";
+    for ($i = 1; $i <= $outsideListNum; $i++){ 
+        echo "<li>".$i ."</li>";
+        echo "<ul>";
+        for ($j = 1; $j <= $insideListNum; $j++){
+             echo "&nbsp;&nbsp;&nbsp;&nbsp;<li>".$j."</li>"; 
         }
-    }      
+        echo "</ul>";
+    }
+    echo "</ul>";      
 }
 
 
@@ -27,6 +31,6 @@ function myFunction($num1,$num2) {
     <title>Exercise 1</title>
 </head>
 <body>
-    echo myFunction(4,5);
+    <?php echo myFunction(4,5); ?>
 </body>
 </html>
