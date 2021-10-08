@@ -1,5 +1,5 @@
 <?php
-$var = "nicole";
+/*$var = "nicole";
 $val = "williams";
 
 $string="this is a string";
@@ -14,15 +14,15 @@ echo $string[strlen($string)-1];
 //Use curly braces
 $favoriteAnimal = "cat";
 echo "My favorite animals are {$favoriteAnimal}s";
-/*This produces the expected result:
-My favorite animals are cats*/
+//This produces the expected result:
+//My favorite animals are cats
 $i=0;
 $output = "";
 while ($1<10) {
     $output .= $i."--";
     $i++;
 }
-echo output;
+echo output;*/
 
 ?>
 
@@ -35,7 +35,10 @@ echo output;
     <title>PHP Basics</title>
 </head>
 <body>
-    <p>My name is <?php echo $var." ".$val;  ?></p> 
+    <form method="post">
+    <input type="text" name="firstname" >
+    </form>
+    <p> <?php echo $_POST["firstname"]?> </p> 
     
 </body>
 
