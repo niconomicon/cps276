@@ -23,41 +23,59 @@ One will be the file that is your class.
 
 The other will be a file that requires your class and calls the appropriate method. This is
 the file you will provide the web address for. */
+
 //define class
 class Calculator {
+    
+    public static function calc ($string, $num1="n", $num2="n") {
+        //test number parameters
+        try {   
 
-    //create calc method
-    public static function calc ($string, $num1, $num2) {
-        $output="";
-        //echo $string;
-        //echo $num1;
-        //echo $num2;
+            if ($num2=="n"||$num1=="n") {
 
+                throw new Exception("You must enter a string and two numbers<br>");
+            } else {
+                //test string operator parameter
+                try {
 
-        if ($string=="+"||"-"||"*"||"/") {
-            //echo "operator found";
-            switch ($string) {
-                case "-":
-                    echo "<br>The difference of the numbers is: ".($num1 - $num2); break;
-                case "*":
-                    echo "<br>The product of the numbers is: ".($num1 * $num2); break;
-                case "/":
-                    if ($num2!==0) { 
-                        echo "<br>The division of the numbers is: ".($num1 / $num2); break;
-                    } else {
-                    echo "<br>Cannot divide by 0"; break;
-                    }
-                default:
-                    echo "<br>The sum of the numbers is: ".($num1 + $num2); break;
-            } 
-
-        } else {
-            echo "<br>operator unknown";
+                    switch ($string) {
+                        
+                        case "+":
+                            echo "The sum of the numbers is ".($num1 + $num2)."<br>"; break;
+                        case "-":
+                            echo "The difference of the numbers is ".($num1 - $num2) ."<br>"; break;
+                        case "*":
+                            echo "The product of the numbers is ".($num1 * $num2)."<br>"; break;
+                        case "/":
+                            try {
+                                if ($num2!==0) { 
+                                    echo "The division of the numbers is ".($num1 / $num2)."<br>"; break;
+                                } else {
+                                //echo "Cannot divide by 0<br>"; break;
+                                throw new Exception("Cannot divide by zero<br>"); 
+                                }
+                            } catch (Exception $e){
+                                echo $e->getMessage(); break;
+                            }
+                        default:
+                        //echo "operator unknown 1<br>";
+                        throw new Exception("The operator entered is unknown<br>");
+                    } 
+                } catch (Exception $e){
+                    echo $e->getMessage();
+                }
+       
+            }
+        } catch (Exception $e){
+            echo $e->getMessage();
         }
 
+
     }
-         
-}
+} 
+
+  
+
 
 
 ?>
