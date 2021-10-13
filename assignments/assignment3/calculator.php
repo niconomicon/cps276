@@ -31,15 +31,14 @@ class Calculator {
         //test number parameters
         try {   
 
-            if ($num2=="n"||$num1=="n") {
-
+            if (is_int($num2)==false||is_int($num1)==false) {
                 throw new Exception("You must enter a string and two numbers<br>");
             } else {
                 //test string operator parameter
                 try {
 
                     switch ($string) {
-                        
+
                         case "+":
                             echo "The sum of the numbers is ".($num1 + $num2)."<br>"; break;
                         case "-":
