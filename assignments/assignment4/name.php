@@ -14,6 +14,7 @@ class Name {
       $newName= "{$_POST["enterName"]}";
       
       $this->addName($this->formatName($newName));
+      $this->sortNames();
       
       $output = $this->showNames();
     
@@ -67,9 +68,17 @@ class Name {
      function showNames() {
       $nameFile = 'names.txt';
       $currentList = file_get_contents($nameFile);
+      
+
       return $currentList;
 
     } 
+
+    function sortNames() {
+      $file = file('names.txt');
+      sort($file);
+      file_put_contents("names.txt", $file);
+    }
 
 }
 

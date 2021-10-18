@@ -23,30 +23,18 @@ form all you will have is the following code above the doctype. The code shown i
 the solution, you don't have to use it verbatim but it should be similar. You can name
 your class and methods whatever you want.
 
-
-
 You will have an additional PHP block added that will put the names into the textarea as
 shown.
-
-<textarea style="height: 500px;" class="form-control"
-id="namelist" name="namelist"><?php echo $output ?></textarea>
 
 NOTE: New line characters are written as "\n" in a textarea box. Huge hint you can
 input all your names as one big string separated by \n. Make sure that they are in
 double quotes or the \n will not work.
 See video for how application should work. */
-   
-
-
+  
   require_once 'name.php';
   $nameDisplay = new Name();
   $output = $nameDisplay->addClearNames();
-
-        
-
 ?>
-
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -72,13 +60,12 @@ See video for how application should work. */
 </div>
           
         <div class="form-group">
-          <label for="enterName">Enter Name:</label>
+          <label for="enterName">Enter Name</label>
           <input type="text" class="form-control" name="enterName" id="enterName">
         </div>
         <div class="form-group">
           <label for="listOfNames">List of Names</label>
-          <textarea style="height: 500px;" class="form-control" id="namelist" name="nameList" > <?php echo $output ?>
-        </textarea>
+          <textarea style="height: 500px;" class="form-control" id="namelist" name="nameList" ><?php echo $output ?> </textarea>
         </div>
 
         
