@@ -23,11 +23,7 @@ form all you will have is the following code above the doctype. The code shown i
 the solution, you don't have to use it verbatim but it should be similar. You can name
 your class and methods whatever you want.
 
-if(count($_POST) > 0){
- require_once 'addNameProc.php';
- $addName = new AddNamesProc();
- $output = $addName->addClearNames();
-}
+
 
 You will have an additional PHP block added that will put the names into the textarea as
 shown.
@@ -40,23 +36,124 @@ input all your names as one big string separated by \n. Make sure that they are 
 double quotes or the \n will not work.
 See video for how application should work. */
 
-/*SET THE VALUE OF OUTPUT TO EMPTY STRING SO NOTHING SHOWS WHEN THE PAGE FIRST LOADS*/
+
+
+/*if(count($_POST) > 0){
+  require_once 'Name.php';
+  $addName = new Name();
+  $output = $addName->showNames();
+ }*/
+ 
+
+ 
+//class stuff
+
+/*
+
+
 $output = "";
-$secondOutput = "";
+        
+require_once 'names.txt';
+require_once 'index.php';
 
 
-/*IF THE SUBMIT BUTTON IS CLICKED DO THE FOLLOWING. */
+
+
+
+
+
 if(isset($_POST['submitButton'])){
-$output = <<<HTML
-  <p>This is the information sent to the server and displayed through the &amp;_POST superglobal.</p>
-    <dl>
-    <dt>Name</dt><dd>{$_POST["enterName"]}</dd>
-    </dl>
-HTML;
 
-$textOutput = "{$_POST["enterName"]}";
+  $newName= "{$_POST["enterName"]}";
+  
+  addName(formatName($newName));
+  
+  
+  $output = showNames();
+
+
+
+
+} else if (isset($_POST['clearButton'])){
+  clearNames();
+}
+
+
+
+function formatName ($plainName) {
+  $firstName="";
+  $lastName="";
+  $formalName="";
+  //FIRST NAME
+  for ($i=0; $i < strlen($plainName); $i++) {
+
+    if ($plainName[$i]!==" ") {
+      //echo "Current letter is: ".$plainName[$i]."<br>";
+      $firstName .= $plainName[$i];
+      //echo "First Name is: ".$plainName."<br>";
+    } else {
+      //echo "Found a space";
+      $nameSpace=$i;
+      for ($j=0; $j < strlen(substr($plainName,$nameSpace)); $j++) {
+        //echo "Current letter is: ".substr($plainName,$nameSpace)[$j]."<br>";
+        $lastName .= substr($plainName,$nameSpace)[$j];
+        //echo "Last Name is: ".$lastName."<br>";
+        $formalName=$lastName.", ".$firstName;
+        //echo $formalName;
+      
+      }
+      $i=strlen($plainName);
+      //echo $firstName;
+      //echo $lastName;
+
+    }
+    
+  }
+  return $formalName;
+
+
+
 
 }
+
+
+
+function addName($name) {
+  $nameFile = 'names.txt';
+  $currentList = file_get_contents($nameFile);
+  $currentList .= $name."\n";
+  file_put_contents($nameFile, $currentList);
+
+  //echo "Added ".$name." to Names List";
+
+}
+
+
+function clearNames() {
+  file_put_contents("names.txt", "");
+  
+}
+
+
+
+function showNames() {
+  //$nameList = "";
+  $nameFile = 'names.txt';
+  $currentList = file_get_contents($nameFile);
+
+  return $currentList;
+
+}
+
+*/
+   
+
+
+  require_once 'name.php';
+  $nameDisplay = new Name();
+  $output = $nameDisplay->addClearNames();
+
+        
 
 ?>
 
@@ -71,7 +168,7 @@ $textOutput = "{$_POST["enterName"]}";
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
-    <title>Basic Form</title>
+    <title>Assignment 4</title>
     <style>
       input[type="radio"]{margin: 0 10px 0 0;}
     </style>
@@ -82,7 +179,7 @@ $textOutput = "{$_POST["enterName"]}";
       <form action="index.php" method="post">  
         <div class="form-group">
         <input type="submit" class="btn btn-primary" name="submitButton" id="submitButton" value="Add Name" />
-        <button type="button" class="btn btn-primary" name="clearNames" id="clearNames">Clear Names</button>
+        <input type="submit" class="btn btn-primary" name="clearButton" id="clearNames"value="Clear Names"/>
 </div>
           
         <div class="form-group">
@@ -91,7 +188,7 @@ $textOutput = "{$_POST["enterName"]}";
         </div>
         <div class="form-group">
           <label for="listOfNames">List of Names</label>
-          <textarea readonly style="height: 500px;" class="form-control" id="namelist" name="nameList" > <?php echo $textOutput ?>
+          <textarea style="height: 500px;" class="form-control" id="namelist" name="nameList" > <?php echo $output ?>
         </textarea>
         </div>
 
@@ -100,7 +197,7 @@ $textOutput = "{$_POST["enterName"]}";
         <?php  
         //require_once "Names.txt"; 
         //require_once "Calculator.php";
-        echo $output  ?>
+        //echo $output  ?>
       </main>
     </body>
 </html>
