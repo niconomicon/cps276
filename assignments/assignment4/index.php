@@ -35,117 +35,6 @@ NOTE: New line characters are written as "\n" in a textarea box. Huge hint you c
 input all your names as one big string separated by \n. Make sure that they are in
 double quotes or the \n will not work.
 See video for how application should work. */
-
-
-
-/*if(count($_POST) > 0){
-  require_once 'Name.php';
-  $addName = new Name();
-  $output = $addName->showNames();
- }*/
- 
-
- 
-//class stuff
-
-/*
-
-
-$output = "";
-        
-require_once 'names.txt';
-require_once 'index.php';
-
-
-
-
-
-
-
-if(isset($_POST['submitButton'])){
-
-  $newName= "{$_POST["enterName"]}";
-  
-  addName(formatName($newName));
-  
-  
-  $output = showNames();
-
-
-
-
-} else if (isset($_POST['clearButton'])){
-  clearNames();
-}
-
-
-
-function formatName ($plainName) {
-  $firstName="";
-  $lastName="";
-  $formalName="";
-  //FIRST NAME
-  for ($i=0; $i < strlen($plainName); $i++) {
-
-    if ($plainName[$i]!==" ") {
-      //echo "Current letter is: ".$plainName[$i]."<br>";
-      $firstName .= $plainName[$i];
-      //echo "First Name is: ".$plainName."<br>";
-    } else {
-      //echo "Found a space";
-      $nameSpace=$i;
-      for ($j=0; $j < strlen(substr($plainName,$nameSpace)); $j++) {
-        //echo "Current letter is: ".substr($plainName,$nameSpace)[$j]."<br>";
-        $lastName .= substr($plainName,$nameSpace)[$j];
-        //echo "Last Name is: ".$lastName."<br>";
-        $formalName=$lastName.", ".$firstName;
-        //echo $formalName;
-      
-      }
-      $i=strlen($plainName);
-      //echo $firstName;
-      //echo $lastName;
-
-    }
-    
-  }
-  return $formalName;
-
-
-
-
-}
-
-
-
-function addName($name) {
-  $nameFile = 'names.txt';
-  $currentList = file_get_contents($nameFile);
-  $currentList .= $name."\n";
-  file_put_contents($nameFile, $currentList);
-
-  //echo "Added ".$name." to Names List";
-
-}
-
-
-function clearNames() {
-  file_put_contents("names.txt", "");
-  
-}
-
-
-
-function showNames() {
-  //$nameList = "";
-  $nameFile = 'names.txt';
-  $currentList = file_get_contents($nameFile);
-
-  return $currentList;
-
-}
-
-*/
    
 
 
@@ -194,10 +83,7 @@ function showNames() {
 
         
       </form>
-        <?php  
-        //require_once "Names.txt"; 
-        //require_once "Calculator.php";
-        //echo $output  ?>
+        
       </main>
     </body>
 </html>
