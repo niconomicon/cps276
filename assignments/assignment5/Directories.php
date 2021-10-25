@@ -21,35 +21,35 @@ class Directories {
       
      
       //if clear button is clicked
-    } else if (isset($_POST['clearButton'])){
+    } /* else if (isset($_POST['clearButton'])){
         
         $this->rrmdir("directories");
-        $output="Directories cleared successfully";
-    }
+        $output="<br>Directories cleared successfully";
+    }*/
         return $output;
 
     }
 
      function createDirectory ($dirName,$fileText) {
-        $message="";
+        $message="<br>";
         $fileDirPath="directories/".$dirName;
         if ($dirName!=="") {
           
           if (is_dir($fileDirPath)) {
               
-              $message = "A directory already exists with that name";
+              $message .= "A directory already exists with that name";
           }
           else {
                   //make directory
                   mkdir($fileDirPath, 0777);
                   //make file
                   $this->makeFile ($fileText, $dirName);
-                  $message = ('File and directory were created<br>
+                  $message .= ('File and directory were created<br>
                   <a href="'.$fileDirPath.'/readme.txt">Path where file is located</a>');  
           }
           
         } else {
-          $message = 'A directory cannot be created with that name<br>';
+          $message .= 'A directory cannot be created with that name';
         }
 
         return $message; 
@@ -62,8 +62,8 @@ class Directories {
         touch($fileDirPath."/readme.txt",0777, true);
         file_put_contents($fileDirPath."/readme.txt", $fileText);
      }
-      
-      //remove all directories and sub-dirctories recursively within a directory
+      /*
+      //remove all directories and sub-directories within a directory
       function rrmdir($dir) {
         if (is_dir($dir)) {
           $objects = scandir($dir);
@@ -88,7 +88,7 @@ class Directories {
             array_map( 'rmdir', array_filter((array) glob($dir."/*") ) );
   }
         
-
+*/
     
 
 }

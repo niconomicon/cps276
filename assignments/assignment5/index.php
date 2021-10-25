@@ -59,8 +59,8 @@ require_once 'Directories.php';
           <textarea style="height: 300px;" class="form-control" id="textForFile" name="textForFile" ></textarea>
         </div>
         <div class="form-group">
-        <input type="submit" class="btn btn-primary" name="submitButton" id="submitButton" value="Add Directory" />
-        <input type="submit" class="btn btn-primary" name="clearButton" id="clearDirs"value="Clear Directories"/>
+        <input type="submit" class="btn btn-primary" name="submitButton" id="submitButton" value="Submit" />
+        <!--<input type="submit" class="btn btn-primary" name="clearButton" id="clearDirs"value="Clear Directories"/>-->
 </div>
 
         
