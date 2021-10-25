@@ -37,30 +37,36 @@ require_once 'Directories.php';
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <title>Assignment 5</title>
+    <title>File and Directory Assignment</title>
 </head>
 <body>
 <main class="container">
-      <h1>Add Directories</h1>
+      <h1>File and Directory Assignment</h1>
+      
+      <p>Enter a folder name and the contents of a file: <br>
+      <?php echo $output; ?></p>
+      
       <form action="index.php" method="post">  
         
         <div class="form-group">
-          <label for="enterDirName">Enter Directory Name</label>
+          <label for="enterDirName">Folder Name</label>
           <input type="text" class="form-control" name="enterDirName" id="enterDirName">
+          <small>Folder names should contain alpha numeric characters only</small>
         </div>
+        
         <div class="form-group">
-          <label for="textForFile">Enter Text for File</label>
-          <textarea style="height: 500px;" class="form-control" id="textForFile" name="textForFile" > </textarea>
+          <label for="textForFile">File Content</label>
+          <textarea style="height: 300px;" class="form-control" id="textForFile" name="textForFile" ></textarea>
         </div>
         <div class="form-group">
         <input type="submit" class="btn btn-primary" name="submitButton" id="submitButton" value="Add Directory" />
-        <!--<input type="submit" class="btn btn-primary" name="clearButton" id="clearNames"value="Clear Names"/>-->
+        <input type="submit" class="btn btn-primary" name="clearButton" id="clearDirs"value="Clear Directories"/>
 </div>
 
         
       </form>
-        
+      
       </main>
-    <?php echo ""; ?>
+    
 </body>
 </html>

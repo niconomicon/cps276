@@ -3,45 +3,53 @@
 //define class
 class Directories {
     
-    function addClearNames() {
-    /*SET THE VALUE OF OUTPUT TO EMPTY STRING SO NOTHING SHOWS WHEN THE PAGE FIRST LOADS*/
-    $output = "";
+    function addFilesDirectories() {
+
+    $output="";
+    
     /*IF THE SUBMIT BUTTON IS CLICKED DO THE FOLLOWING. */
 
     //if add button is clicked
     if(isset($_POST['submitButton'])){
       
-      $newDirName= "{$_POST["enterDirName"]}";
-      echo "Dir name is: "."{$_POST["enterDirName"]}";
-      $newTextForFile= "{$_POST["textForFile"]}";
-      echo "File text is: "."{$_POST["textForFile"]}";
+      $newDirName="{$_POST["enterDirName"]}";
       
-      $this->addName($this->formatName($newName));
-      $this->sortNames();
+      $newTextForFile="{$_POST["textForFile"]}";
       
-      $output = $this->showNames();
-    
+
+      $output = $this->createDirectory($newDirName,$newTextForFile);
+      
+     
       //if clear button is clicked
     } else if (isset($_POST['clearButton'])){
         
-        $this->clearNames();
+        $this->rrmdir("directories");
+        $output="Directories cleared successfully";
     }
         return $output;
 
     }
 
-     function createDirectory ($dirName) {
+     function createDirectory ($dirName,$fileText) {
         $message="";
-
-        if (is_dir($dirName)) {
-            $message = "A directory already exists with that name";
-        }
-        else {
-            mkdir(directories/$dirName);
-            echo "empty file created in ".$dirName." directory";
-            touch('readme.txt');
-            $message = "Path were file is located";
-            
+        $fileDirPath="directories/".$dirName;
+        if ($dirName!=="") {
+          
+          if (is_dir($fileDirPath)) {
+              
+              $message = "A directory already exists with that name";
+          }
+          else {
+                  //make directory
+                  mkdir($fileDirPath, 0777);
+                  //make file
+                  $this->makeFile ($fileText, $dirName);
+                  $message = ('File and directory were created<br>
+                  <a href="'.$fileDirPath.'/readme.txt">Path where file is located</a>');  
+          }
+          
+        } else {
+          $message = 'A directory cannot be created with that name<br>';
         }
 
         return $message; 
@@ -49,41 +57,39 @@ class Directories {
 
 
 
-    function makeFile ($fileText) {
-        file_put_contents("readme.txt", $fileText);
+    function makeFile ($fileText, $dirName) {
+        $fileDirPath="directories/".$dirName;
+        touch($fileDirPath."/readme.txt",0777, true);
+        file_put_contents($fileDirPath."/readme.txt", $fileText);
      }
       
-      
-      
-      
-     //   $nameFile = 'names.txt';
-      //$currentList = file_get_contents($nameFile);
-      //$currentList .= $name."\n";
-      //file_put_contents($nameFile, $currentList);
+      //remove all directories and sub-dirctories recursively within a directory
+      function rrmdir($dir) {
+        if (is_dir($dir)) {
+          $objects = scandir($dir);
+          foreach ($objects as $object) {
+            if ($object != "." && $object != "..") {
+              if (filetype($dir."/".$object) == "dir") 
+                 $this->rrmdir($dir."/".$object); 
+              else unlink   ($dir."/".$object);
+            }
+          }
+          reset($objects);
+          //rmdir($dir);
+          
+          $this->removeObjects($dir);
+          
+        }
+       }
 
-
-
+ 
+       //remove all directories within a single directory
+          function removeObjects($dir) {
+            array_map( 'rmdir', array_filter((array) glob($dir."/*") ) );
+  }
+        
 
     
-
-     function clearNames() {
-      file_put_contents("names.txt", "");
-    }
-
-     function showNames() {
-      $nameFile = 'names.txt';
-      $currentList = file_get_contents($nameFile);
-      
-
-      return $currentList;
-
-    } 
-
-    function sortNames() {
-      $file = file('names.txt');
-      sort($file);
-      file_put_contents("names.txt", $file);
-    }
 
 }
 
