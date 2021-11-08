@@ -2,9 +2,9 @@
 require_once 'PdoMethods.php';
 class File {
 
-    public function addServerFile() {
+    public function addFile() {
 
-        if (isset( $_POST["sendFile"])){
+        if (isset( $_POST["submit"])){
             processFile();
         }
         else {
@@ -13,7 +13,7 @@ class File {
 
     }
     function processFile(){
-        // I PUT THE PHOTO INTO A DIRECTORY NAMED PHOTOS WHICH IS ALREADY ON THE SERVER AND HAS 777 FILE PERMISSIONS
+        
         
         //I HAD TO MAKE $OUTPUT A GLOBAL VARIBLE SO IT COULD BE USED INSIDE AND OUTSIDE THIS FUNCTION
         global $output;
@@ -32,18 +32,21 @@ class File {
             $output = "The file is too large";
         }
     
-        //CHECK TO MAKE SURE IT IS THE CORRECT FILE TYPE IN THIS CASE JPEG OR PNG
+        //CHECK TO MAKE SURE IT IS THE CORRECT FILE TYPE 
         elseif ($_FILES["file"]["type"] != "application/pdf") {
     
             $output = "<p>PDFs only, thanks!</p>";
         }
     
-        //IF ALL GOES WELL MOVE FILE FROM TEMP LCOATION TO THE PHOTOS DIRECTORY 
-        elseif (!move_uploaded_file( $_FILES["file"]["tmp_name"], "files/".$_FILES["file"]["name"])){
+        //IF ALL GOES WELL MOVE FILE FROM TEMP LCOATION TO THE FILES DIRECTORY 
+        elseif (!move_uploaded_file( $_FILES["file"]["tmp_name"], "files/".$_POST['fileName'])){
                 echo "filename of uploaded file: ".$_FILES["file"]["tmp_name"]."<br>";
-                echo "destination of the moved file: "."files/". $_FILES["file"]["name"]."<br>";
+                echo "destination of the moved file: "."files/".$_POST['fileName']."<br>";
                 $output = "<p>Sorry, there was a problem uploading that file.</p>";
                 echo "Not uploaded because of error #".$_FILES["file"]["error"];
+
+                //ADD FILE TO DATABASE
+                $this->addDBFile(); 
                 
         }
         else {
@@ -79,15 +82,21 @@ class File {
         
 	
             $pdo = new PdoMethods();
+
+            $filePath="files/".$_POST['fileName'];
+            $fileName=$_POST['fileName'];
+            
     
             /* HERE I CREATE THE SQL STATEMENT I AM BINDING THE PARAMETERS */
-            $sql = "INSERT INTO files (filename, filepath) VALUES (:fileName, :filepath)";
+            $sql = "INSERT INTO filesTable (filename, filepath) VALUES ('$fileName', '$filePath')";
+            
+            
     
                  
             /* THESE BINDINGS ARE LATER INJECTED INTO THE SQL STATEMENT THIS PREVENTS AGAIN SQL INJECTIONS */
             $bindings = [
-                [':filename',$_POST['fileName'],'str'],
-                [':filepath',$_POST['filepath'],'str'],
+                [':fileName',$_POST['fileName'],'str'],
+                ['$filePath',$filePath,'str'],
             ];
     
             /* I AM CALLING THE OTHERBINDED METHOD FROM MY PDO CLASS */
@@ -129,7 +138,7 @@ class File {
     public function getFiles(){
         $pdo = new PdoMethods();
         
-        $sql = "SELECT * FROM files";
+        $sql = "SELECT * FROM filesTable";
 
         $records = $pdo->selectNotBinded($sql);
 
@@ -142,7 +151,7 @@ class File {
                 return $this->makeList($records);	
             }
             else {
-                return 'no customers found';
+                return 'no files found';
             }
         }
     }
@@ -175,8 +184,9 @@ class File {
 
     private function makeList($records){
         $output = "<ul>";
+       
 		foreach ($records as $row){
-            $output .= "<li><a target='_blank' href='files/newsletterorform1.pdf'>{$row['filename']}</a></li>";
+            $output .= "<li><a target='_blank' href='files/".$_POST['fileName']."'>{$row['filename']}</a></li>";
 		}
 		$output .= "</ul>";
 		return $output;

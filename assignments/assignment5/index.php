@@ -22,6 +22,7 @@ NOTE: For this project you will need to first create the "directories" directory
 server (no need to write PHP code to create it).
 NOTE: Make sure to have 777 permissions on the "directories" directory.
 See screenshots for how the forms should look at various stages. */
+ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 
 require_once 'Directories.php';
   $dirDisplay = new Directories();

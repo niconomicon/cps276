@@ -7,8 +7,25 @@ target="_blank" in your anchor element. Below is an example from the solution:
 <li><a target='_blank' href='files/newsletterorform1.pdf'>
 
 That file will require another file named "listFilesProc.php" which will do all the
-processing needed to display a list of the files. The actual page that displays the file
-links will have two PHP blocks. One that requires the file and the other that outputs the
+processing needed to display a list of the files. 
+
+ <ul>
+            <li><a target='_blank' href='files/newsletterorform1.pdf'>1</li>
+            </ul>  
+
+The actual page that displays the file links will have two PHP blocks. One that requires the file and the other that outputs the
 list of links.*/
+
+
+require 'fileList.php';
+
+ function listOfLinks(){
+
+    require_once 'File.php';
+    $fileFunc = new File();
+    $output = $fileFunc->getFiles();
+
+ }
+
 
 ?>

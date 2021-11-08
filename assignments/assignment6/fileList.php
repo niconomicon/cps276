@@ -36,6 +36,17 @@ will have some more PHP code to the PHP form file.
 */
 
   //$output = $dirDisplay->addFilesDirectories();
+// will do all the processing needed to display a list of the files. The actual page that displays the file links will have two PHP blocks:
+
+//One that requires the file 
+
+ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+
+require_once 'File.php';
+$file = new File;
+$output=$file->getFiles();
+
+//the other that outputs the list of links
 
 ?>
 <!DOCTYPE html>
@@ -51,7 +62,7 @@ will have some more PHP code to the PHP form file.
 </head>
 <body>
 <main class="container">
-      <h1>File Upload</h1>
+      <h1>List Files</h1>
       
       <p><a href="index.php">Add File</a><br> 
       <div>
