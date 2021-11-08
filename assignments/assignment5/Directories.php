@@ -25,7 +25,7 @@ class Directories {
         
         $this->rrmdir("directories");
         $output="<br>Directories cleared successfully";
-    }*/
+    } */
         return $output;
 
     }
