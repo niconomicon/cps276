@@ -12,12 +12,13 @@ You must create or use classes for
 the PDO operations and Database connections.*/ 
 
 //will do all the file uploading and inserting the data into the data base. 
-require 'File.php';
+
 
 
 function fileUpload() {
-
+    require_once 'File.php';
     $fileFunc = new File();
     $output = $fileFunc->addFile();
+    return $output;
 
 }?>

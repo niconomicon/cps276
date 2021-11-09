@@ -97,9 +97,9 @@ HTML;
 
 */
 
-require_once 'File.php';
 
-if (isset( $_POST["submit"])){
+
+/* if (isset( $_POST["submit"])){
 	processFile();
 }
 else {
@@ -142,6 +142,7 @@ function processFile(){
         $output = "<p>Sorry, there was a problem uploading that file.</p>";
 
             //ADD FILE TO DATABASE
+			//require_once 'File.php';
             $file= new File();
             $file->addDBFile(); 
             
@@ -173,12 +174,12 @@ return <<<HTML
 
 HTML;
 	
-}
+} */
 
 
 
-//require_once 'fileUploadProc.php';
-//$output = fileUploadProc->processFile();
+require 'fileUploadProc.php';
+$output = fileUpload();
 
 ?>
 

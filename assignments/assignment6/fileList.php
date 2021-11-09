@@ -42,9 +42,13 @@ will have some more PHP code to the PHP form file.
 
 ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
 
-require_once 'File.php';
+/* require_once 'File.php';
 $file = new File;
-$output=$file->getFiles();
+$output=$file->getFiles(); */
+
+require 'listFilesProc.php';
+$output=listOfLinks();
+
 
 //the other that outputs the list of links
 

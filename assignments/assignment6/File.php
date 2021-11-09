@@ -5,7 +5,7 @@ class File {
     public function addFile() {
 
         if (isset( $_POST["submit"])){
-            processFile();
+            $this->processFile();
         }
         else {
             $output = "";
@@ -39,11 +39,11 @@ class File {
         }
     
         //IF ALL GOES WELL MOVE FILE FROM TEMP LCOATION TO THE FILES DIRECTORY 
+
+        //copy(string $source, string $dest)
         elseif (!move_uploaded_file( $_FILES["file"]["tmp_name"], "files/".$_POST['fileName'])){
-                echo "filename of uploaded file: ".$_FILES["file"]["tmp_name"]."<br>";
-                echo "destination of the moved file: "."files/".$_POST['fileName']."<br>";
                 $output = "<p>Sorry, there was a problem uploading that file.</p>";
-                echo "Not uploaded because of error #".$_FILES["file"]["error"];
+                
 
                 //ADD FILE TO DATABASE
                 $this->addDBFile(); 
@@ -52,27 +52,14 @@ class File {
         else {
             //IF ALL GOES WELL CALL DISPLAY THANKS METHOD	
             
-            $output = displayMessage();
+            $output = "Thanks for uploading your file: ".$_POST['fileName']."!";
         }
     
     }
 
     
 
-    function displayMessage() {
-
-      
-        /*NOTICE I USE THE POST SUPERGLOBAL ARRAY TO GET THE NAME AND NOT
-        THE FLES SUPERGLOBAL ARRAY.  ALL FILES USE $_FILES ALL TEXT ENTERIES USE $_POST
-        */
-        
-        return "Thanks for uploading your file: ".$_POST['fileName']."!";
-            //<p>Here's your photo:</p>
-            //<p><img src="files/{$_FILES['file']['name']}" alt="File"></p>
-        
-       
-            
-        }
+  
 
     
 
@@ -184,9 +171,8 @@ class File {
 
     private function makeList($records){
         $output = "<ul>";
-       
 		foreach ($records as $row){
-            $output .= "<li><a target='_blank' href='files/".$_POST['fileName']."'>{$row['filename']}</a></li>";
+            $output .= "<li><a target='_blank' href='files/".$row['filepath']."'>{$row['filename']}</a></li>";
 		}
 		$output .= "</ul>";
 		return $output;

@@ -16,15 +16,12 @@ processing needed to display a list of the files.
 The actual page that displays the file links will have two PHP blocks. One that requires the file and the other that outputs the
 list of links.*/
 
-
-require 'fileList.php';
-
  function listOfLinks(){
 
     require_once 'File.php';
     $fileFunc = new File();
     $output = $fileFunc->getFiles();
-
+   return $output;
  }
 
 
