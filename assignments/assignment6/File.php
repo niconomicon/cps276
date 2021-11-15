@@ -41,17 +41,18 @@ class File {
         //IF ALL GOES WELL MOVE FILE FROM TEMP LCOATION TO THE FILES DIRECTORY 
 
         //copy(string $source, string $dest)
-        elseif (!move_uploaded_file( $_FILES["file"]["tmp_name"], "files/".$_POST['fileName'])){
+        /*elseif (!move_uploaded_file( $_FILES["file"]["tmp_name"], "files/".$_POST['fileName'])){
                 $output = "<p>Sorry, there was a problem uploading that file.</p>";
                 
 
-                //ADD FILE TO DATABASE
-                $this->addDBFile(); 
                 
-        }
+                
+                
+        }*/
         else {
-            //IF ALL GOES WELL CALL DISPLAY THANKS METHOD	
-            
+            //IF ALL GOES WELL CALL DISPLAY THANKS METHOD
+            //ADD FILE TO DATABASE	
+            $this->addDBFile(); 
             $output = "Thanks for uploading your file: ".$_POST['fileName']."!";
         }
     
@@ -172,7 +173,7 @@ class File {
     private function makeList($records){
         $output = "<ul>";
 		foreach ($records as $row){
-            $output .= "<li><a target='_blank' href='files/".$row['filepath']."'>{$row['filename']}</a></li>";
+            $output .= "<li><a target='_blank' href='files/newsletterform1.pdf'>{$row['filename']}</a></li>";
 		}
 		$output .= "</ul>";
 		return $output;
