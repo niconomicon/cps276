@@ -142,59 +142,62 @@ $form = <<<HTML
       <input type="text" class="form-control" id="name" name="name" value="{$elementsArr['name']['value']}" >
     </div>
     <div class="form-group">
-      <label for="phone">Phone (format 999.999.9999) {$elementsArr['phone']['errorOutput']}</label>
+      <label for="phone">Address (just # and street) {$elementsArr['phone']['errorOutput']}</label>
       <input type="text" class="form-control" id="phone" name="phone" value="{$elementsArr['phone']['value']}" >
     </div>
-
-            
+    <div class="form-group">
+      <label for="phone">City  {$elementsArr['phone']['errorOutput']}</label>
+      <input type="text" class="form-control" id="phone" name="phone" value="{$elementsArr['phone']['value']}" >
+    </div>
     <div class="form-group">
       <label for="state">State</label>
       <select class="form-control" id="state" name="state">
         $options
       </select>
     </div>
+    <div class="form-group">
+      <label for="phone">Phone (format 999.999.9999) {$elementsArr['phone']['errorOutput']}</label>
+      <input type="text" class="form-control" id="phone" name="phone" value="{$elementsArr['phone']['value']}" >
+    </div>
 
-    <p>Please check all financial options (you must check at least one):{$elementsArr['financial']['errorOutput']}</p>
+            
+    
+
+    <p>Please check all contact types you would like (optional):{$elementsArr['financial']['errorOutput']}</p>
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="checkbox" name="financial[]" id="financial1" value="cash" {$elementsArr['financial']['status']['cash']}>
-      <label class="form-check-label" for="financial1">Cash</label>
+      <label class="form-check-label" for="financial1">Newsletter</label>
     </div>
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="checkbox" name="financial[]" id="financial2" value="check" {$elementsArr['financial']['status']['check']}>
-      <label class="form-check-label" for="financial2">Check</label>
+      <label class="form-check-label" for="financial2">Email</label>
     </div>
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="checkbox" name="financial[]" id="financia3" value="credit" {$elementsArr['financial']['status']['credit']}>
-      <label class="form-check-label" for="financial3">Credit</label>
+      <label class="form-check-label" for="financial3">Text</label>
     </div>
         
 
-    <p>Please select an eye color (optional):</p>
+    <p>Please select an age range (you must select one):</p>
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="eyeColor" id="eyeColor1" value="blue"  {$elementsArr['eyeColor']['value']['blue']}>
-      <label class="form-check-label" for="eyeColor1">Blue</label>
+      <label class="form-check-label" for="eyeColor1">10-18</label>
     </div>
 
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="eyeColor" id="eyeColor2" value="brown"  {$elementsArr['eyeColor']['value']['brown']}>
-      <label class="form-check-label" for="eyeColor2">Brown</label>
+      <label class="form-check-label" for="eyeColor2">19-30</label>
     </div>
 
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="eyeColor" id="eyeColor3" value="hazel"  {$elementsArr['eyeColor']['value']['hazel']}>
-      <label class="form-check-label" for="eyeColor3">Hazel</label>
+      <label class="form-check-label" for="eyeColor3">30-50</label>
     </div>
 
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="eyeColor" id="eyeColor4" value="green"  {$elementsArr['eyeColor']['value']['green']}>
-      <label class="form-check-label" for="eyeColor4">Green</label>
+      <label class="form-check-label" for="eyeColor4">51+</label>
     </div>
-
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="eyeColor" id="eyeColor5" value="other"  {$elementsArr['eyeColor']['value']['other']}>
-      <label class="form-check-label" for="eyeColor5">Other</label>
-    </div>
-
     <div>
     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
     </div>

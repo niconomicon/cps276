@@ -1,14 +1,19 @@
 <?php
+
 include('pages/routes.php');
+
 
 echo $nav; 
 
 function init(){
-    
-     
 
-    return ["<h1>Welcome</h1>","<p>Welcome [username].</p>"];
+   
+    return ["<h1>Welcome</h1>","<p>Welcome!</p>"];
+
 }
+
+
+
 
 ?>
 

@@ -14,9 +14,6 @@ $nav=<<<HTML
   <li class="nav-item">
     <a class="nav-link" href="index.php?page=login">Logout</a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">Disabled</a>
-  </li>
 </ul>
 HTML;
 
