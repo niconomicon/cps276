@@ -102,11 +102,7 @@ class Date_time {
     function getNotes(){
         $notes ="";
 
-        if (isset( $_POST["get"])){
-            $this->showNotes();
-        }else {
-            $output= "...";
-        }
+        
     }
 
     function showNotes(){
@@ -174,19 +170,35 @@ class Date_time {
     }
     
         */
-        
-        $output = "<table class='table table-bordered table-striped'><thead><tr>";
-		$output .= "<th>Date & Time</th><th>Note</th><tbody>";
-		foreach ($records as $row){
 
-			$output .= "<tr><td>{$row['datetime']}</td>";
-            $output .= "<td>{$row['note']}</td></tr>";
+       /* if (isset( $_POST["get"])){
             
 
-			
-		}
+        $begin=$_POST['beginDate'];
+        $end=$_POST['endDate'];
+        */
+        $output = "<table class='table table-bordered table-striped'><thead><tr>";
+		$output .= "<th>Date & Time</th><th>Note</th><tbody>";
+        
+            foreach ($records as $row){
+                //$timestamp=$row['datetime'];
+                //if (preg_match("[$begin-$end]", $timestamp)) {
+
+                $output .= "<tr><td>{$row['datetime']}</td>";
+                $output .= "<td>{$row['note']}</td></tr>";
+    
+                
+            //}
+        }
 		
 		$output .= "</tbody></table>";
+
+        /*
+
+        }else {
+            $output= "no post is set for the dates";
+        }*/
+        
 		return $output;
     }
 } 
