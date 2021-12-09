@@ -3,62 +3,91 @@
 Final Project Instructions
 Workflow
 When the application first loads the user will be taken to a login page where they will
-login with their email and password (user must already have an account). The user will
-have a status assigned to them of staff or admin. If they are staff, then they can only
+login with their email and password (user must already have an account). 
+
+The user will have a status assigned to them of staff or admin. If they are staff, then they can only
 add and delete contacts. If they are an admin they can also add and delete other
 admins. Their status will be stored in a database.
+
 When they successfully login they will be taken to a welcome page that will state
 "Welcome and then their name", they will also see links to the pages they can access.
+
 If they select the "Add Contact Information" link they will be taken to a form where they
-can add a contact. When they click the submit button on the add contact information
-form each text field will be validated. The validation will check for proper formatting and
-if the field is blank (no fields can be blank). If a form field value is valid then no error
-message is shown, if a from field value is not valid then an error message will be shown
-above the field entry box. If there is an error for any of the form fields, all the from
-fields entries will be preserved.
+can add a contact. 
+
+When they click the submit button on the add contact information form each text field will be validated. 
+
+The validation will check for proper formatting and if the field is blank (no fields can be blank). 
+
+If a form field value is valid then no error message is shown, if a from field value is not valid then an error message 
+will be shown above the field entry box. 
+
+If there is an error for any of the form fields, all the from fields entries will be preserved.
+
 Also, for the checkboxes, dropdown select box, and radio buttons their state
-(checked/selected or not checked/not selected) will be preserved. If the user does not
+(checked/selected or not checked/not selected) will be preserved. 
+If the user does not
 select an age range, they will get a message stating that they must select an age range.
+
 The checkboxes are optional and can be selected or not.
+
 If there are no errors, then the form field data will be put into a database and a message
 will appear at the top of the form reading, "Contact Information added". If there is a
 problem with adding the record but all form field validation is done, then a message will
 display reading, " There was an error adding the record".
+
 If they click the link "Delete contact(s)" they will be taken to a page that will display all
 the records in the datbase. If there are no records in the database, then a message will
 appear stating "There are no records to display"
+
 These records will be displayed in a tabular format. There will be a checkbox at the end
 of each row. If the user checks one or more checkboxes and clicks the delete button
 records checked will be deleted and a message will display reading "Contact(s)
 deleted". If the application was not able to delete the records then a message will be
 displayed "Could not delete the contacts" If the user does not check the checkboxes but
 clicks the delete button the page will reload but nothing will be deleted.
+
 If they click the logout link, they will be taken to the index page where the login form is
+
 If the user has admin status, then they will be given two more-page links add admin and
 delete admin(s). Both those pages will work just as the contacts pages but with
 different fields as shown in the video.
 Project Specifications and Requirements
+
 You are to create a form and display records page that look like the video (Yes you
 must use Bootstrap).
+
 You are to create two tables. One will be called contacts and hold the contact
 information. The other will be called admins and hold the admin information.
+
 You will need to evaluate certain patterns on the fields as shown.
+
 Name – alpha characters (upper and lower case), hyphens, apostrophes, spaces only
 (cannot be blank).
+
 Address – start with a number, then alpha characters, spaces, hyphens, and periods
 (cannot be blank).
+
 City – Must be alpha characters only.
+
 Phone – Must be in the format 999.999.9999, where 9 is a digit of 0 to 9 (cannot be
 blank).
+
 Email address – Valid email address (cannot be blank).
+
 DOB – mm/dd/yyyy should format to a proper date (cannot be blank).
+
 Password – will take letters, numbers and special characters.
+
 In addition, for the add contact form, you will create one select drop down box that will
 contain 5 states. It must be sticky as well so if the user selects a state and there is an
 error on the form that selection will remain.
+
 Also, for the add contact form, you will create three checkboxes and four radio buttons.
+
 If a radio button is not selected, then after the submit button is clicked a message will
 appear displaying the following text “You must select an age range”.
+
 The regular expressions for phone can accept all zeros or other bad combinations. If
 you want to write a regular expression better that what is expected that is fine. Also,
 feel free to look the regular expressions up on the Internet, you do not have to write
