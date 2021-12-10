@@ -12,6 +12,12 @@ $nav=<<<HTML
     <a class="nav-link" href="index.php?page=deleteContacts">Delete Contact(s)</a>
   </li>
   <li class="nav-item">
+    <a class="nav-link" href="index.php?page=addAdmin">Add Admin(s)</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="index.php?page=deleteAdmins">Delete Admin(s)</a>
+  </li>
+  <li class="nav-item">
     <a class="nav-link" href="index.php?page=login">Logout</a>
   </li>
 </ul>
@@ -44,6 +50,19 @@ if(isset($_GET)){
         $result = init();
 
     }
+
+    else if($_GET['page'] === "addAdmin"){
+        require_once('pages/addAdmin.php');
+        $result = init();
+
+    }
+
+    else if($_GET['page'] === "deleteAdmins"){
+        require_once('pages/deleteAdmins.php');
+        $result = init();
+
+    }
+
     else if($_GET['page'] === "login"){
         require_once('pages/login.php');
         $result = init();

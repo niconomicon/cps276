@@ -95,7 +95,7 @@ $elementsArr = [
   "dob"=>[
     "errorMessage"=>"<span style='color: red; margin-left: 15px;'>mm/dd/yyyy should format to a proper date (cannot be blank).</span>",
     "errorOutput"=>"",
-    "type"=>"date",
+    "type"=>"text",
     "value"=>"12/25/1999",
     "action"=>"required",
     "regex"=>"dob"
@@ -108,7 +108,7 @@ $elementsArr = [
     "status"=>["Newsletter"=>"", "Email"=>"", "Text"=>""]
   ],
   "ageRange"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one age option</span>",
+    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select an age range</span>",
     "errorOutput"=>"",
     "type"=>"radio",
     "action"=>"required",

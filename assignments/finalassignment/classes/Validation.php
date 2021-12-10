@@ -9,13 +9,35 @@ class Validation{
 	{
 		switch($regex){
 			case "name": return $this->name($value); break;
+            case "address": return $this->address($value); break;
+            case "city": return $this->city($value); break;
 			case "phone": return $this->phone($value); break;
+            case "email": return $this->email($value); break;
+            case "dob": return $this->dob($value); break;
 			
 			
 		}
 	}
 
+    /*You will need to evaluate certain patterns on the fields as shown.
 
+Name – alpha characters (upper and lower case), hyphens, apostrophes, spaces only
+(cannot be blank).
+
+Address – start with a number, then alpha characters, spaces, hyphens, and periods
+(cannot be blank).
+
+City – Must be alpha characters only.
+
+Phone – Must be in the format 999.999.9999, where 9 is a digit of 0 to 9 (cannot be
+blank).
+
+Email address – Valid email address (cannot be blank).
+
+DOB – mm/dd/yyyy should format to a proper date (cannot be blank).
+
+Password – will take letters, numbers and special characters.
+ */
 		
 	/* THE REST OF THE FUNCTIONS ARE THE INDIVIDUAL REGULAR EXPRESSION FUNCTIONS*/
 	private function name($value){
@@ -23,8 +45,28 @@ class Validation{
 		return $this->setError($match);
 	}
 
+    private function address($value){
+		$match = preg_match('/^\d{3}.[a-z-\' ]{1,50}/i', $value);
+		return $this->setError($match);
+	}
+
+    private function city ($value){
+		$match = preg_match('/^[a-z-\' ]{1,50}$/i', $value);
+		return $this->setError($match);
+	}
+
 	private function phone($value){
 		$match = preg_match('/\d{3}\.\d{3}.\d{4}/', $value);
+		return $this->setError($match);
+	}
+
+    private function email($value){
+		$match = preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,})$/i', $value);
+		return $this->setError($match);
+	}
+
+    private function dob($value){
+		$match = preg_match('/\d{1}\/\d{2}.\d{4}/', $value);
 		return $this->setError($match);
 	}
 

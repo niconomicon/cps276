@@ -96,8 +96,10 @@ The regular expressions for phone can accept all zeros or other bad combinations
 you want to write a regular expression better that what is expected that is fine. Also,
 feel free to look the regular expressions up on the Internet, you do not have to write
 them from scratch.
+
 The status filed in the add admin page will be a dropdown with two options (staff and
 admin).
+
 All pages will appear in the index.php page. Basically, the index.php page is a holding
 page for all the other pages. The actual page and other logic will be in a folder named
 “pages".
