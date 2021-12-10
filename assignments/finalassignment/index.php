@@ -60,9 +60,9 @@ Project Specifications and Requirements
 You are to create a form and display records page that look like the video (Yes you
 must use Bootstrap).
 
-You are to create two tables. 
+You are to create two tables. DONE
 One will be called contacts and hold the contactinformation. DONE
-The other will be called admins and hold the admin information. 
+The other will be called admins and hold the admin information. DONE
 
 You will need to evaluate certain patterns on the fields as shown.
 
@@ -101,10 +101,12 @@ admin).
 All pages will appear in the index.php page. Basically, the index.php page is a holding
 page for all the other pages. The actual page and other logic will be in a folder named
 “pages".
+
 You will have a routes.php page that will control all the routing for bringing in the content
 of the other pages. You will pass the page name though the URL.
 russet.wccnet.edu/~your username/path to your index
 page/index.php?page=addContact
+
 If you enter the URL to just the index page (without the parameter) or to the wrong
 parameter, the user will be redirected to the form page
 You will need to do the following:

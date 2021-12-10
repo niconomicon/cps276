@@ -15,37 +15,7 @@ function init(){
 
     /*THIS METHODS TAKE THE POST ARRAY AND THE ELEMENTS ARRAY (SEE BELOW) AND PASSES THEM TO THE VALIDATION FORM METHOD OF THE STICKY FORM CLASS.  IT UPDATES THE ELEMENTS ARRAY AND RETURNS IT, THIS IS STORED IN THE $postArr VARIABLE */
     $postArr = $stickyForm->validateForm($_POST, $elementsArr);
-//
-    //I HAD TO MAKE $OUTPUT A GLOBAL VARIBLE SO IT COULD BE USED INSIDE AND OUTSIDE THIS FUNCTION
-    global $output;
-    
-        
-        
-    //CHECK TO SEE IF A FILE WAS UPLOADED.  ERROR EQUALS 4 MEANS THERE WAS NO FILE UPLOADED
-    if ($_POST["name"]!==null){
-        $output = "No file was uploaded. Make sure you choose a file to upload.";
-        
-    }
 
-    /*MAKE SURE THE FILE SIZE IS LESS THAN 1000000 BYTES.  THE ERROR EQUALS ONE MEANS THE FILE WAS TOO BIG ACCORDING TO THE SETINGS IN
-    post_max_size LOCATED IN THE PHP INI FILE.*/
-    elseif($_FILES["file"]["size"] > 1000000 || $_FILES["file"]["error"] == 1){
-        $output = "The file is too large";
-    }
-
-    //CHECK TO MAKE SURE IT IS THE CORRECT FILE TYPE 
-    elseif ($_FILES["file"]["type"] != "application/pdf") {
-
-        $output = "<p>PDFs only, thanks!</p>";
-    }
-
-    //IF ALL GOES WELL MOVE FILE FROM TEMP LCOATION TO THE FILES DIRECTORY 
-//
-
-  //CHECKS
-    if ($post['name']) {
-      
-    }
     /* THE ELEMENTS ARRAY HAS A MASTER STATUS AREA. IF THERE ARE ANY ERRORS FOUND THE STATUS IS CHANGED TO "ERRORS" FROM THE DEFAULT OF "NOERRORS".  DEPENDING ON WHAT IS RETURNED DEPENDS ON WHAT HAPPENS NEXT.  IN THIS CASE THE RETURN MESSAGE HAS "NO ERRORS" SO WE HAVE NO PROBLEMS WITH OUR VALIDATION AND WE CAN SUBMIT THE FORM */
     if($postArr['masterStatus']['status'] == "noerrors"){
       
@@ -57,8 +27,6 @@ function init(){
       /* IF THERE WAS A PROBLEM WITH THE FORM VALIDATION THEN THE MODIFIED ARRAY ($postArr) WILL BE SENT AS THE SECOND PARAMETER.  THIS MODIFIED ARRAY IS THE SAME AS THE ELEMENTS ARRAY BUT ERROR MESSAGES AND VALUES HAVE BEEN ADDED TO DISPLAY ERRORS AND MAKE IT STICKY */
       return getForm("",$postArr);
     }
-
-
 
     
   }
@@ -100,11 +68,11 @@ $elementsArr = [
     "regex"=>"city"
   ],
   "state"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one updates option</span>",
+    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one state option</span>",
     "errorOutput"=>"",
     "type"=>"select",
-    "options"=>["mi"=>"Michigan","oh"=>"Ohio","pa"=>"Pennslyvania","tx"=>"Texas"],
-		"selected"=>"oh",
+    "options"=>["mi"=>"Michigan","oh"=>"Ohio","pa"=>"Pennslyvania","tx"=>"Texas","ct"=>"Connecticut"],
+		"selected"=>"mi",
     "action"=>"required",
 		"regex"=>"state"
 	],
@@ -133,7 +101,7 @@ $elementsArr = [
     "regex"=>"dob"
   ],
   "updates"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one updates option</span>",
+    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Select all update types you would like</span>",
     "errorOutput"=>"",
     "type"=>"checkbox",
     "action"=>"required",
@@ -225,7 +193,7 @@ $form = <<<HTML
       <input type="text" class="form-control" id="city" name="city" value="{$elementsArr['city']['value']}" >
     </div>
     <div class="form-group">
-      <label for="state">State</label>
+      <label for="state">State {$elementsArr['state']['errorOutput']}</label>
       <select class="form-control" id="state" name="state">
         $options
       </select>
@@ -234,19 +202,27 @@ $form = <<<HTML
       <label for="phone">Phone (format 999.999.9999) {$elementsArr['phone']['errorOutput']}</label>
       <input type="text" class="form-control" id="phone" name="phone" value="{$elementsArr['phone']['value']}" >
     </div>
+    <div class="form-group">
+      <label for="email">Email {$elementsArr['email']['errorOutput']}</label>
+      <input type="text" class="form-control" id="email" name="email" value="{$elementsArr['email']['value']}" >
+    </div>
+    <div class="form-group">
+      <label for="dob">Date of Birth {$elementsArr['dob']['errorOutput']}</label>
+      <input type="text" class="form-control" id="dob" name="dob" value="{$elementsArr['dob']['value']}" >
+    </div>
     
 
     <p>Please check all contact types you would like (optional):{$elementsArr['updates']['errorOutput']}</p>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" name="updates[]" id="updates1" value="cash" {$elementsArr['updates']['status']['Newsletter']}>
+      <input class="form-check-input" type="checkbox" name="updates[]" id="updates1" value="Newsletter" {$elementsArr['updates']['status']['Newsletter']}>
       <label class="form-check-label" for="updates1">Newsletter</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" name="updates[]" id="updates2" value="check" {$elementsArr['updates']['status']['Email']}>
+      <input class="form-check-input" type="checkbox" name="updates[]" id="updates2" value="Email" {$elementsArr['updates']['status']['Email']}>
       <label class="form-check-label" for="updates2">Email</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" name="updates[]" id="updates3" value="credit" {$elementsArr['updates']['status']['Text']}>
+      <input class="form-check-input" type="checkbox" name="updates[]" id="updates3" value="Text" {$elementsArr['updates']['status']['Text']}>
       <label class="form-check-label" for="updates3">Text</label>
     </div>
         

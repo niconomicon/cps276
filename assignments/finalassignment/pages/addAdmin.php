@@ -15,37 +15,7 @@ function init(){
 
     /*THIS METHODS TAKE THE POST ARRAY AND THE ELEMENTS ARRAY (SEE BELOW) AND PASSES THEM TO THE VALIDATION FORM METHOD OF THE STICKY FORM CLASS.  IT UPDATES THE ELEMENTS ARRAY AND RETURNS IT, THIS IS STORED IN THE $postArr VARIABLE */
     $postArr = $stickyForm->validateForm($_POST, $elementsArr);
-//
-    //I HAD TO MAKE $OUTPUT A GLOBAL VARIBLE SO IT COULD BE USED INSIDE AND OUTSIDE THIS FUNCTION
-    global $output;
-    
-        
-        
-    //CHECK TO SEE IF A FILE WAS UPLOADED.  ERROR EQUALS 4 MEANS THERE WAS NO FILE UPLOADED
-    if ($_POST["name"]!==null){
-        $output = "No file was uploaded. Make sure you choose a file to upload.";
-        
-    }
 
-    /*MAKE SURE THE FILE SIZE IS LESS THAN 1000000 BYTES.  THE ERROR EQUALS ONE MEANS THE FILE WAS TOO BIG ACCORDING TO THE SETINGS IN
-    post_max_size LOCATED IN THE PHP INI FILE.*/
-    elseif($_FILES["file"]["size"] > 1000000 || $_FILES["file"]["error"] == 1){
-        $output = "The file is too large";
-    }
-
-    //CHECK TO MAKE SURE IT IS THE CORRECT FILE TYPE 
-    elseif ($_FILES["file"]["type"] != "application/pdf") {
-
-        $output = "<p>PDFs only, thanks!</p>";
-    }
-
-    //IF ALL GOES WELL MOVE FILE FROM TEMP LCOATION TO THE FILES DIRECTORY 
-//
-
-  //CHECKS
-    if ($post['name']) {
-      
-    }
     /* THE ELEMENTS ARRAY HAS A MASTER STATUS AREA. IF THERE ARE ANY ERRORS FOUND THE STATUS IS CHANGED TO "ERRORS" FROM THE DEFAULT OF "NOERRORS".  DEPENDING ON WHAT IS RETURNED DEPENDS ON WHAT HAPPENS NEXT.  IN THIS CASE THE RETURN MESSAGE HAS "NO ERRORS" SO WE HAVE NO PROBLEMS WITH OUR VALIDATION AND WE CAN SUBMIT THE FORM */
     if($postArr['masterStatus']['status'] == "noerrors"){
       
@@ -57,8 +27,6 @@ function init(){
       /* IF THERE WAS A PROBLEM WITH THE FORM VALIDATION THEN THE MODIFIED ARRAY ($postArr) WILL BE SENT AS THE SECOND PARAMETER.  THIS MODIFIED ARRAY IS THE SAME AS THE ELEMENTS ARRAY BUT ERROR MESSAGES AND VALUES HAVE BEEN ADDED TO DISPLAY ERRORS AND MAKE IT STICKY */
       return getForm("",$postArr);
     }
-
-
 
     
   }
@@ -179,11 +147,11 @@ $form = <<<HTML
     </div>
     <div class="form-group">
       <label for="city">Password  {$elementsArr['password']['errorOutput']}</label>
-      <input type="password" class="form-control" id="city" name="city" value="{$elementsArr['city']['value']}" >
+      <input type="password" class="form-control" id="password" name="password" value="{$elementsArr['password']['value']}" >
     </div>
     <div class="form-group">
-      <label for="city">Password  {$elementsArr['password']['errorOutput']}</label>
-      <input type="dropdown" class="form-control" id="city" name="city" value="{$elementsArr['city']['value']}" >
+      <label for="status">Status  {$elementsArr['status']['errorOutput']}</label>
+      <input type="dropdown" class="form-control" id="status" name="status" value="{$elementsArr['status']['status']}" >
     </div>
   </form>
 
