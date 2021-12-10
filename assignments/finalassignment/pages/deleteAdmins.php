@@ -14,7 +14,7 @@ function init(){
             foreach($_POST['chkbx'] as $id){
                 $pdo = new PdoMethods();
 
-                $sql = "DELETE FROM contacts WHERE id=:id";
+                $sql = "DELETE FROM admin WHERE id=:id";
                 
                 $bindings = [
                     [':id', $id, 'int'],
@@ -36,7 +36,7 @@ function init(){
     $pdo = new PdoMethods();
 
     /* HERE I CREATE THE SQL STATEMENT I AM BINDING THE PARAMETERS */
-    $sql = "SELECT * FROM contacts";
+    $sql = "SELECT * FROM admin";
 
     $records = $pdo->selectNotBinded($sql);
 
@@ -45,32 +45,22 @@ function init(){
         return [$output,""];
     }
     else {
-        $output = "<form method='post' action='index.php?page=deleteContacts'>";
+        $output = "<form method='post' action='index.php?page=deleteAdmins'>";
         $output .= "<input type='submit' class='btn btn-danger' name='delete' value='Delete'/><br><br><table class='table table-striped table-bordered'>
     <thead>
         <tr>
         <th>Name</th>
-        <th>Address</th>
-        <th>City</th>
-        <th>State</th>
-        <th>Phone</th>
         <th>Email</th>
-        <th>DOB</th>
-        <th>Age</th>
-        <th>Contact</th>
+        <th>Password</th>
+        <th>Status</th>
         </tr>
     </thead><tbody>";
 
     foreach($records as $row){
         $output .= "<tr><td>{$row['name']}</td>
-        <td>{$row['address']}</td>
-        <td>{$row['city']}</td>
-        <td>{$row['state']}</td>
-        <td>{$row['phone']}</td>
         <td>{$row['email']}</td>
-        <td>{$row['dob']}</td>
-        <td>{$row['age']}</td>
-        <td>{$row['contact']}</td>
+        <td>{$row['pwd']}</td>
+        <td>{$row['status']}</td>
         <td><input type='checkbox' name='chkbx[]' value='{$row['id']}' /></td></tr>";
     }
 
@@ -78,10 +68,10 @@ function init(){
 
     if(isset($error)){
         if($error){
-            $msg = "<p>Could not delete the contact(s)</p>";
+            $msg = "<p>Could not delete the admin(s)</p>";
         }
         else {
-            $msg = "<p>Contact(s) deleted</p>";
+            $msg = "<p>Admin(s) deleted</p>";
         }
     }
     else {

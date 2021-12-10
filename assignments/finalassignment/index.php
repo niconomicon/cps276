@@ -5,9 +5,12 @@ Workflow
 When the application first loads the user will be taken to a login page where they will
 login with their email and password (user must already have an account). 
 
-The user will have a status assigned to them of staff or admin. If they are staff, then they can only
-add and delete contacts. If they are an admin they can also add and delete other
-admins. Their status will be stored in a database.
+The user will have a status assigned to them of staff or admin. 
+
+If they are staff, then they can only add and delete contacts. If they are an admin they can also add and delete other
+admins. 
+
+Their status will be stored in a database.
 
 When they successfully login they will be taken to a welcome page that will state
 "Welcome and then their name", they will also see links to the pages they can access.
@@ -57,8 +60,9 @@ Project Specifications and Requirements
 You are to create a form and display records page that look like the video (Yes you
 must use Bootstrap).
 
-You are to create two tables. One will be called contacts and hold the contact
-information. The other will be called admins and hold the admin information.
+You are to create two tables. 
+One will be called contacts and hold the contactinformation. DONE
+The other will be called admins and hold the admin information. 
 
 You will need to evaluate certain patterns on the fields as shown.
 
@@ -149,7 +153,7 @@ require_once('pages/routes.php');
 	<body class="container">
 	<div> <?php
 			//THIS IS THE PHP PAGE 
-			//echo $nav;
+			echo $nav;
 			// THE ACKNOWLEDGEMENT GOES HERE AS THE FIRST INDEX OF THE ARRAY  
 			echo $result[0]; 
 

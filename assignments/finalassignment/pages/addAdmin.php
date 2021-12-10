@@ -82,70 +82,32 @@ $elementsArr = [
     "value"=>"Scott",
 		"regex"=>"name"
 	],
-  "address"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Must start with a number, then alpha characters, spaces, hyphens, and periods
-    (cannot be blank).</span>",
-    "errorOutput"=>"",
-    "type"=>"text",
-    "value"=>"123 Someplace ",
-    "action"=>"required",
-    "regex"=>"address"
-  ],
-  "city"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Must be alpha characters only.</span>",
-    "errorOutput"=>"",
-    "type"=>"text",
-    "value"=>"Anywhere",
-    "action"=>"notRequired",
-    "regex"=>"city"
-  ],
-  "state"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one updates option</span>",
-    "errorOutput"=>"",
-    "type"=>"select",
-    "options"=>["mi"=>"Michigan","oh"=>"Ohio","pa"=>"Pennslyvania","tx"=>"Texas"],
-		"selected"=>"oh",
-    "action"=>"required",
-		"regex"=>"state"
-	],
-	"phone"=>[
-		"errorMessage"=>"<span style='color: red; margin-left: 15px;'>Phone cannot be blank and must be a valid phone number</span>",
-    "errorOutput"=>"",
-    "type"=>"text",
-		"value"=>"999.999.9999",
-    "action"=>"required",
-		"regex"=>"phone"
-  ],
   "email"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Valid email address (cannot be blank).</span>",
+    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one updates option</span>",
     "errorOutput"=>"",
     "type"=>"text",
     "value"=>"sshaper@test.com",
     "action"=>"required",
     "regex"=>"email"
+    
   ],
-  "dob"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>mm/dd/yyyy should format to a proper date (cannot be blank).</span>",
-    "errorOutput"=>"",
-    "type"=>"date",
-    "value"=>"12/25/1999",
-    "action"=>"required",
-    "regex"=>"dob"
-  ],
-  "updates"=>[
+  "password"=>[
     "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one updates option</span>",
     "errorOutput"=>"",
-    "type"=>"checkbox",
+    "type"=>"text",
+    "value"=>"password",
     "action"=>"required",
-    "status"=>["Newsletter"=>"", "Email"=>"", "Text"=>""]
+    "regex"=>"dob"
+    
   ],
-  "ageRange"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one age option</span>",
+  "status"=>[
+    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one updates option</span>",
     "errorOutput"=>"",
-    "type"=>"radio",
+    "type"=>"dropdown",
     "action"=>"required",
-    "value"=>["10-18"=>"", "19-30"=>"", "31-50"=>"","51+"=>""]
-  ]
+    "status"=>["admin"=>"", "staff"=>""]
+  ],
+  
 ];
 
 
@@ -158,10 +120,10 @@ function addData($post){
 
       $pdo = new PdoMethods();
 
-      $sql = "INSERT INTO contacts (name, address, city, state, phone, email, dob, age, contact) VALUES (:name, :address, :city, :state, :phone, :email, :dob, :age, :contact)";
+      $sql = "INSERT INTO contacts (name, email, password, status) VALUES (:name, :email, :password, :status)";
 
       // THIS TAKE THE ARRAY OF CHECK BOXES AND PUT THE VALUES INTO A STRING SEPERATED BY COMMAS  
-      if(isset($_POST['updates'])){
+     /* if(isset($_POST['updates'])){
         $updates = "";
         foreach($post['updates'] as $v){
           $updates .= $v.",";
@@ -169,25 +131,20 @@ function addData($post){
         // REMOVE THE LAST COMMA FROM THE CONTACTS 
         $updates = substr($updates, 0, -1);
       }
-
-      if(isset($_POST['ageRange'])){
-        $ageRange = $_POST['ageRange'];
+*/
+      if(isset($_POST['status'])){
+        $status = $_POST['status'];
       }
       else {
-        $ageRange = "";
+        $status = "";
       } 
 
 
       $bindings = [
         [':name',$post['name'],'str'],
-        [':address',$post['address'],'str'],
-        [':city',$post['city'],'str'],
-        [':state',$post['state'],'str'],
-        [':phone',$post['phone'],'str'],
         [':email',$post['email'],'str'],
-        [':dob',$post['dob'],'str'],
-        [':age',$ageRange,'str'],
-        [':contact',$updates,'str']
+        [':password',$post['password'],'str'],
+        [':status',$status['status'],'str']
 
       ];
 
@@ -197,7 +154,7 @@ function addData($post){
         return getForm("<p>There was a problem processing your form</p>", $elementsArr);
       }
       else {
-        return getForm("<p>Contact Information Added</p>", $elementsArr);
+        return getForm("<p>Admin Information Added</p>", $elementsArr);
       }
       
 }
@@ -217,62 +174,16 @@ $form = <<<HTML
       <input type="text" class="form-control" id="name" name="name" value="{$elementsArr['name']['value']}" >
     </div>
     <div class="form-group">
-      <label for="address">Address (just # and street) {$elementsArr['address']['errorOutput']}</label>
+      <label for="address">Email {$elementsArr['email']['errorOutput']}</label>
       <input type="text" class="form-control" id="address" name="address" value="{$elementsArr['address']['value']}" >
     </div>
     <div class="form-group">
-      <label for="city">City  {$elementsArr['city']['errorOutput']}</label>
-      <input type="text" class="form-control" id="city" name="city" value="{$elementsArr['city']['value']}" >
+      <label for="city">Password  {$elementsArr['password']['errorOutput']}</label>
+      <input type="password" class="form-control" id="city" name="city" value="{$elementsArr['city']['value']}" >
     </div>
     <div class="form-group">
-      <label for="state">State</label>
-      <select class="form-control" id="state" name="state">
-        $options
-      </select>
-    </div>
-    <div class="form-group">
-      <label for="phone">Phone (format 999.999.9999) {$elementsArr['phone']['errorOutput']}</label>
-      <input type="text" class="form-control" id="phone" name="phone" value="{$elementsArr['phone']['value']}" >
-    </div>
-    
-
-    <p>Please check all contact types you would like (optional):{$elementsArr['updates']['errorOutput']}</p>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" name="updates[]" id="updates1" value="cash" {$elementsArr['updates']['status']['Newsletter']}>
-      <label class="form-check-label" for="updates1">Newsletter</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" name="updates[]" id="updates2" value="check" {$elementsArr['updates']['status']['Email']}>
-      <label class="form-check-label" for="updates2">Email</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" name="updates[]" id="updates3" value="credit" {$elementsArr['updates']['status']['Text']}>
-      <label class="form-check-label" for="updates3">Text</label>
-    </div>
-        
-
-    <p>Please select an age range (you must select one):</p>
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="ageRange" id="ageRange1" value="10-18"  {$elementsArr['ageRange']['value']['10-18']}>
-      <label class="form-check-label" for="ageRange1">10-18</label>
-    </div>
-
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="ageRange" id="ageRange2" value="19-30"  {$elementsArr['ageRange']['value']['19-30']}>
-      <label class="form-check-label" for="ageRange2">19-30</label>
-    </div>
-
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="ageRange" id="ageRange3" value="31-50"  {$elementsArr['ageRange']['value']['31-50']}>
-      <label class="form-check-label" for="ageRange3">31-50</label>
-    </div>
-
-    <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="ageRange" id="ageRange4" value="51+"  {$elementsArr['ageRange']['value']['51+']}>
-      <label class="form-check-label" for="ageRange4">51+</label>
-    </div>
-    <div>
-    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+      <label for="city">Password  {$elementsArr['password']['errorOutput']}</label>
+      <input type="dropdown" class="form-control" id="city" name="city" value="{$elementsArr['city']['value']}" >
     </div>
   </form>
 
