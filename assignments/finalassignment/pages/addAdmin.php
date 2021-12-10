@@ -59,13 +59,13 @@ $elementsArr = [
     "regex"=>"email"
     
   ],
-  "password"=>[
-    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must select at least one updates option</span>",
+  "pwd"=>[
+    "errorMessage"=>"<span style='color: red; margin-left: 15px;'>You must enter a password</span>",
     "errorOutput"=>"",
     "type"=>"text",
     "value"=>"password",
     "action"=>"required",
-    "regex"=>"dob"
+    "regex"=>"pwd"
     
   ],
   "status"=>[
@@ -73,7 +73,7 @@ $elementsArr = [
     "errorOutput"=>"",
     "type"=>"dropdown",
     "action"=>"required",
-    "status"=>["admin"=>"", "staff"=>""]
+    "value"=>"admin"
   ],
   
 ];
@@ -88,7 +88,7 @@ function addData($post){
 
       $pdo = new PdoMethods();
 
-      $sql = "INSERT INTO contacts (name, email, password, status) VALUES (:name, :email, :password, :status)";
+      $sql = "INSERT INTO admin (name, email, pwd, status) VALUES (:name, :email, :pwd, :status)";
 
       // THIS TAKE THE ARRAY OF CHECK BOXES AND PUT THE VALUES INTO A STRING SEPERATED BY COMMAS  
      /* if(isset($_POST['updates'])){
@@ -111,8 +111,8 @@ function addData($post){
       $bindings = [
         [':name',$post['name'],'str'],
         [':email',$post['email'],'str'],
-        [':password',$post['password'],'str'],
-        [':status',$status['status'],'str']
+        [':pwd',$post['pwd'],'str'],
+        [':status',$post['status'],'str']
 
       ];
 
@@ -132,26 +132,29 @@ function addData($post){
 function getForm($acknowledgement, $elementsArr){
 
 global $stickyForm;
-$options = $stickyForm->createOptions($elementsArr['state']);
+//$options = $stickyForm->createOptions($elementsArr['status']);
 
 /* THIS IS A HEREDOC STRING WHICH CREATES THE FORM AND ADD THE APPROPRIATE VALUES AND ERROR MESSAGES */
 $form = <<<HTML
-    <form method="post" action="index.php?page=addContact">
+    <form method="post" action="index.php?page=addAdmin">
     <div class="form-group">
       <label for="name">Name (letters only){$elementsArr['name']['errorOutput']}</label>
       <input type="text" class="form-control" id="name" name="name" value="{$elementsArr['name']['value']}" >
     </div>
     <div class="form-group">
-      <label for="address">Email {$elementsArr['email']['errorOutput']}</label>
-      <input type="text" class="form-control" id="address" name="address" value="{$elementsArr['address']['value']}" >
+      <label for="email">Email {$elementsArr['email']['errorOutput']}</label>
+      <input type="text" class="form-control" id="email" name="email" value="{$elementsArr['email']['value']}" >
     </div>
     <div class="form-group">
-      <label for="city">Password  {$elementsArr['password']['errorOutput']}</label>
-      <input type="password" class="form-control" id="password" name="password" value="{$elementsArr['password']['value']}" >
+      <label for="city">Password  {$elementsArr['pwd']['errorOutput']}</label>
+      <input type="pwd" class="form-control" id="pwd" name="pwd" value="{$elementsArr['pwd']['value']}" >
     </div>
     <div class="form-group">
       <label for="status">Status  {$elementsArr['status']['errorOutput']}</label>
-      <input type="dropdown" class="form-control" id="status" name="status" value="{$elementsArr['status']['status']}" >
+      <input type="text" class="form-control" id="status" name="status" value="{$elementsArr['status']['value']}" >
+    </div>
+    <div>
+    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
     </div>
   </form>
 

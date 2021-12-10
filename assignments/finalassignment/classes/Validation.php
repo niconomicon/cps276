@@ -14,6 +14,7 @@ class Validation{
 			case "phone": return $this->phone($value); break;
             case "email": return $this->email($value); break;
             case "dob": return $this->dob($value); break;
+            case "pwd": return $this->pwd($value); break;
 			
 			
 		}
@@ -69,6 +70,13 @@ Password – will take letters, numbers and special characters.
 		$match = preg_match('/\d{1}\/\d{2}.\d{4}/', $value);
 		return $this->setError($match);
 	}
+
+    private function pwd($value){
+		$match = preg_match('/^[a-z-\' ]{1,50}$/i', $value);
+		return $this->setError($match);
+	}
+
+    
 
 	
 	private function setError($match){
