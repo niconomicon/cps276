@@ -73,7 +73,7 @@ $elementsArr = [
     "errorOutput"=>"",
     "type"=>"dropdown",
     "action"=>"required",
-    "value"=>"admin"
+    "value"=>["Admin"=>"","Staff"=>""]
   ],
   
 ];
@@ -256,16 +256,11 @@ $form = <<<HTML
       <label for="city">Password  {$elementsArr['pwd']['errorOutput']}</label>
       <input type="pwd" class="form-control" id="pwd" name="pwd" value="{$elementsArr['pwd']['value']}" >
     </div>
-
-    
-
-
-
     <div class="form-group">
       <label for="status">Status  {$elementsArr['status']['errorOutput']}</label>
-      <select class="form-control" id="status" name="status" value="{$elementsArr['status']['value']}" >
-            <option value="blue">Admin</option>
-            <option value="red">Staff</option>
+      <select class="form-control" name="status" >
+            <option name="status" id="status1" value="admin" {$elementsArr['status']['value']['Admin']}>Admin</option>
+            <option name="status" id="status2"value="staff" {$elementsArr['status']['value']['Staff']}>Staff</option>
     </select>
     </div>
     <div>
