@@ -75,9 +75,6 @@ Password – will take letters, numbers and special characters.
 		$match = preg_match('/^[a-z-\' ]{1,50}$/i', $value);
 		return $this->setError($match);
 	}
-
-    
-
 	
 	private function setError($match){
 		if(!$match){

@@ -1,12 +1,22 @@
 <?php
 
+include('pages/routes.php');
 
+ 
 function init(){
-    $error = '';
+    
+    require_once 'classes/PdoMethods.php';
 
-if(isset($_POST['submit'])){
+    $error = '';
+    echo "initialized";
+
+    if(isset($_POST['submit'])){
+        echo "clicked";
     /* IF THE USERNAME AND PASSWORD MATCH THEN REDIRECT TO */
-    if($_POST['username'] === "admin" && $_POST['password'] === "password"){
+    
+    if($_POST['email'] === "sshaper@test.com" && $_POST['password'] === "password"){
+        echo $_POST['email'];
+        echo $_POST['password'];
       
       session_start();
       $_SESSION['access'] = "accessGranted";
@@ -15,59 +25,37 @@ if(isset($_POST['submit'])){
       $_SESSION['fname'] = $_POST['fname'];
   
       //session_regenerate_id();
-      header('location:index.php?page=welcome');
+      header('index.php?page=welcome');
     }
     else {
       $error = "Incorrect username or password";
     }
+
+
   }
         
-    //$cats='hey look, cats';
-
+    $cats='hey look, cats';
+    
     $login=<<<HTML
 
-    <p class="error"> $error </p>   
-    <form action="index.php"> 
+<h1>Login</h1>
+<p class="error"> $error $cats</p>   
+    <form action="index.php?page=login"> 
     <div class="form-group">
         <label for="exampleInputEmail1">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="sshaper@test.com">
+        <input type="email" class="form-control" id="email" value = "sshaper@test.com" name="email" aria-describedby="emailHelp" placeholder="sshaper@test.com">
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
+        <input type="password" class="form-control" id="password" value = "password" name="password" placeholder="password">
     </div>
     <input type="submit" name="submit" value="Login" class="btn btn-primary">
-    <!-- <a class="btn btn-primary" href="index.php?page=welcome">Login</a> -->
+    <!-- <a class="btn btn-primary" href="index.php?page=login">Login</a> -->
     </form>
 HTML;
             
-    return ["<h1>Login</h1>",$login];
+    return [$error,$login];
 }
-
-
-
-
-
-/*function init(){
-
-    $login=<<<HTML
-
-<h1>Login</h1>    
-    <form>
-    <div class="form-group">
-        <label for="exampleInputEmail1">Email</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="sshaper@test.com">
-    </div>
-    <div class="form-group">
-        <label for="exampleInputPassword1">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password">
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-    </form>
-HTML;
-            
-    return ["<h1>Welcome</h1>",$login];
-}*/
 
 ?>
 

@@ -60,9 +60,9 @@ Project Specifications and Requirements
 You are to create a form and display records page that look like the video (Yes you
 must use Bootstrap).
 
-You are to create two tables. DONE
-One will be called contacts and hold the contactinformation. DONE
-The other will be called admins and hold the admin information. DONE
+You are to create two tables. 
+One will be called contacts and hold the contactinformation. 
+The other will be called admins and hold the admin information. 
 
 You will need to evaluate certain patterns on the fields as shown.
 
@@ -120,8 +120,10 @@ user cannot bypass the login by entering the URL. You can accomplish this
 using sessions.
 • You must use the files and folders I show in the video no extras and no
 omissions.
+//
 • When adding admins you will check for duplicate emails before adding a admin.
 No two admins can have the same email.
+//
 • Write all the code for the required pages. Please see my examples on GitHub as
 a start. You need to use the database and pdo classes I provided or write your
 own. If you use my StickyForm class, you must make sure to write the
@@ -142,6 +144,8 @@ Please see my video to see how the application will function.
 /* THIS ENTIRE PAGE IS JUST A PLACEHOLDER PAGE WHICH THE FORM WILL BE INJECTED INTO */
 /*I REQUIRE IN THE ROUTES PAGE WHICH IS ACTUALLY DOES THE WORK FOR GETTING THE PAGES.*/ 
 require_once('pages/routes.php');
+
+
 
 ?>
 

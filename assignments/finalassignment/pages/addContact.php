@@ -3,7 +3,7 @@
 /* HERE I REQUIRE AND USE THE STICKYFORM CLASS THAT DOES ALL THE VALIDATION AND CREATES THE STICKY FORM.  THE STICKY FORM CLASS USES THE VALIDATION CLASS TO DO THE VALIDATION WORK.*/
 require_once('classes/StickyForm.php');
 require_once('pages/routes.php');
-echo $nav; 
+//echo $nav; 
 $stickyForm = new StickyForm();
 
 /*THE INIT FUNCTION IS WRITTEN TO START EVERYTHING OFF IT IS CALLED FROM THE INDEX.PHP PAGE */
@@ -104,7 +104,7 @@ $elementsArr = [
     "errorMessage"=>"<span style='color: red; margin-left: 15px;'>Select all update types you would like</span>",
     "errorOutput"=>"",
     "type"=>"checkbox",
-    "action"=>"required",
+    "action"=>"notRequired",
     "status"=>["Newsletter"=>"", "Email"=>"", "Text"=>""]
   ],
   "ageRange"=>[
@@ -136,6 +136,8 @@ function addData($post){
         }
         // REMOVE THE LAST COMMA FROM THE CONTACTS 
         $updates = substr($updates, 0, -1);
+      } else {
+        $updates="";
       }
 
       if(isset($_POST['ageRange'])){
@@ -227,7 +229,7 @@ $form = <<<HTML
     </div>
         
 
-    <p>Please select an age range (you must select one):</p>
+    <p>Please select an age range (you must select one):{$elementsArr['ageRange']['errorOutput']}</p>
     <div class="form-check form-check-inline">
       <input class="form-check-input" type="radio" name="ageRange" id="ageRange1" value="10-18"  {$elementsArr['ageRange']['value']['10-18']}>
       <label class="form-check-label" for="ageRange1">10-18</label>

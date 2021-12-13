@@ -3,7 +3,7 @@
 include('pages/routes.php');
 
 
-echo $nav; 
+//echo $nav; 
 
 function init(){
 

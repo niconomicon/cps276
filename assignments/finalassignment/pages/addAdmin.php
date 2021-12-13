@@ -3,7 +3,7 @@
 /* HERE I REQUIRE AND USE THE STICKYFORM CLASS THAT DOES ALL THE VALIDATION AND CREATES THE STICKY FORM.  THE STICKY FORM CLASS USES THE VALIDATION CLASS TO DO THE VALIDATION WORK.*/
 require_once('classes/StickyForm.php');
 require_once('pages/routes.php');
-echo $nav; 
+//echo $nav; 
 $stickyForm = new StickyForm();
 
 /*THE INIT FUNCTION IS WRITTEN TO START EVERYTHING OFF IT IS CALLED FROM THE INDEX.PHP PAGE */
@@ -91,7 +91,7 @@ function addData($post){
       $sql = "INSERT INTO admin (name, email, pwd, status) VALUES (:name, :email, :pwd, :status)";
 
       // THIS TAKE THE ARRAY OF CHECK BOXES AND PUT THE VALUES INTO A STRING SEPERATED BY COMMAS  
-     /* if(isset($_POST['updates'])){
+     /* if(isset($_POST['status'])){
         $updates = "";
         foreach($post['updates'] as $v){
           $updates .= $v.",";
@@ -106,7 +106,7 @@ function addData($post){
       else {
         $status = "";
       } 
-
+//
 
       $bindings = [
         [':name',$post['name'],'str'],
@@ -116,16 +116,123 @@ function addData($post){
 
       ];
 
-      $result = $pdo->otherBinded($sql, $bindings);
+      
+    $sqlEmail = "SELECT * FROM admin";
+
+    $records = $pdo->selectNotBinded($sqlEmail);
+
+
+   $result="";
+
+
+
+    foreach($records as $row){
+        $email = $row['email'];
+        if ($email == $post['email']) {
+            $result = "error";
+            //echo "An admin with that email already exists!"."<br>";
+            break;
+        }    
+    }
+    
+
+
+    if ($result!=="error") {
+        $result = $pdo->otherBinded($sql, $bindings);
+    } else {
+        $result.="1";
+    }
+
+
+
+
+    /*
+    $sqlEmail = "SELECT * FROM admin";
+
+    $records = $pdo->selectNotBinded($sqlEmail);
+
+    if(count($records) === 0){
+        $output = "<p>There are no records to display</p>";
+        return [$output,""];
+    }
+    else {
+    foreach($records as $row){
+        $email = {$row['email']};
+        if ($email == ':email') {
+            echo "An admin with that email already exists!";
+
+        } else {
+            $result = $pdo->otherBinded($sql, $bindings);
+        }
+
+
+    }
+
+    if(isset($error)){
+        if($error){
+            $msg = "<p>Could not delete the admin(s)</p>";
+        }
+        else {
+            $msg = "<p>Admin(s) deleted</p>";
+        }
+    }
+    else {
+        $msg="";
+    }
+
+
+
+
+    $sqlEmail = "SELECT * FROM admin";
+
+    $records = $pdo->selectNotBinded($sqlEmail);
+
+    if(count($records) === 0){
+        $output = "<p>There are no records to display</p>";
+        return [$output,""];
+    }
+    else {
+    foreach($records as $row){
+        
+        $email = $row['email'];
+        echo $email;
+        echo $row['email'];
+        echo ':email:';
+
+        if ($email == ':email') {
+            echo "An admin with that email already exists!<br>";
+            return [$output,""];
+
+        } else {
+            echo "added to the database (but not really)<br>";
+           // $result = $pdo->otherBinded($sql, $bindings);
+        }
+
+
+    }
+}
+
+    */
+
+
+
+
+
+
+    
+    
+      //$result = $pdo->otherBinded($sql, $bindings);
 
       if($result == "error"){
         return getForm("<p>There was a problem processing your form</p>", $elementsArr);
-      }
-      else {
+      } else if ($result == "error1") {
+        return getForm("<p>An admin with that email already exists!</p>", $elementsArr);
+      } else {
         return getForm("<p>Admin Information Added</p>", $elementsArr);
       }
       
 }
+
    
 
 /*THIS IS THEGET FROM FUCTION WHICH WILL BUILD THE FORM BASED UPON UPON THE (UNMODIFIED OF MODIFIED) ELEMENTS ARRAY. */
@@ -149,9 +256,17 @@ $form = <<<HTML
       <label for="city">Password  {$elementsArr['pwd']['errorOutput']}</label>
       <input type="pwd" class="form-control" id="pwd" name="pwd" value="{$elementsArr['pwd']['value']}" >
     </div>
+
+    
+
+
+
     <div class="form-group">
       <label for="status">Status  {$elementsArr['status']['errorOutput']}</label>
-      <input type="text" class="form-control" id="status" name="status" value="{$elementsArr['status']['value']}" >
+      <select class="form-control" id="status" name="status" value="{$elementsArr['status']['value']}" >
+            <option value="blue">Admin</option>
+            <option value="red">Staff</option>
+    </select>
     </div>
     <div>
     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
