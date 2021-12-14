@@ -1,5 +1,5 @@
 <?php
-
+echo $nav;
 /* HERE I REQUIRE AND USE THE STICKYFORM CLASS THAT DOES ALL THE VALIDATION AND CREATES THE STICKY FORM.  THE STICKY FORM CLASS USES THE VALIDATION CLASS TO DO THE VALIDATION WORK.*/
 require_once('classes/StickyForm.php');
 require_once('pages/routes.php');
@@ -8,6 +8,7 @@ $stickyForm = new StickyForm();
 
 /*THE INIT FUNCTION IS WRITTEN TO START EVERYTHING OFF IT IS CALLED FROM THE INDEX.PHP PAGE */
 function init(){
+    
   global $elementsArr, $stickyForm;
 
   /* IF THE FORM WAS SUBMITTED DO THE FOLLOWING  */

@@ -145,6 +145,21 @@ Please see my video to see how the application will function.
 /*I REQUIRE IN THE ROUTES PAGE WHICH IS ACTUALLY DOES THE WORK FOR GETTING THE PAGES.*/ 
 require_once('pages/routes.php');
 
+/* require_once 'classes/Page.php';
+$page = new Page();
+echo $page->head("Encrypted Login - Login Page");
+
+$output = "";
+
+if(isset($_POST['login'])){
+  require_once 'classes/Admin.php';
+  $admin = new Admin();
+  $output = $admin->login($_POST);
+  if($output === 'success'){
+    header('Location: home.php');
+  }
+} */
+
 
 
 ?>
@@ -159,9 +174,11 @@ require_once('pages/routes.php');
 	</head>
 
 	<body class="container">
-	<div> <?php
+	<div> 
+        <?php
 			//THIS IS THE PHP PAGE 
-			echo $nav;
+			
+            //echo $output;
 			// THE ACKNOWLEDGEMENT GOES HERE AS THE FIRST INDEX OF THE ARRAY  
 			echo $result[0]; 
 

@@ -1,9 +1,12 @@
 <?php
+echo $nav;
+
 
 include('pages/routes.php');
 //echo $nav;
 
 function init(){
+  
 
     require_once 'classes/PdoMethods.php';
      
